@@ -2,11 +2,20 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp2)
 }
 
 android {
     namespace = "com.example.androidtodos"
     compileSdk = 35
+
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            // Добавьте следующую строку, чтобы исключить дублирующийся файл
+            excludes += "META-INF/gradle/incremental.annotation.processors"
+        }
+    }
 
     defaultConfig {
         applicationId = "com.example.androidtodos"
@@ -49,6 +58,24 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+
+    //Lifecycle
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+//    implementation(libs.androidx.lifecycle.livedata.ktx) нужна ли ??
+
+    //Room
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
+
+    //Coroutines
+    implementation(libs.coroutines.android)
+
+    //Hilt
+    implementation(libs.hilt.android)
+    implementation(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
