@@ -3,18 +3,25 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp2)
+    alias(libs.plugins.hilt.android4)
 }
 
 android {
     namespace = "com.example.androidtodos"
     compileSdk = 35
 
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-            // Добавьте следующую строку, чтобы исключить дублирующийся файл
-            excludes += "META-INF/gradle/incremental.annotation.processors"
-        }
+//    packagingOptions {
+//        resources {
+//            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+//            // Добавьте следующую строку, чтобы исключить дублирующийся файл
+//            excludes += "META-INF/gradle/incremental.annotation.processors"
+//        }
+//    }
+    androidComponents {
+        onVariants(selector().all(), { variant ->
+            variant.packaging.resources.excludes.add("/META-INF/{AL2.0,LGPL2.1}")
+            variant.packaging.resources.excludes.add("META-INF/gradle/incremental.annotation.processors")
+        })
     }
 
     defaultConfig {
@@ -43,6 +50,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
     buildFeatures {
         compose = true
     }
@@ -73,7 +81,6 @@ dependencies {
 
     //Hilt
     implementation(libs.hilt.android)
-    implementation(libs.hilt.compiler)
     ksp(libs.hilt.compiler)
 
     testImplementation(libs.junit)
