@@ -12,6 +12,7 @@ room = "2.7.2"
 ksp = "2.2.0-2.0.2"
 coroutines = "1.10.2"
 hilt = "2.56.2"
+hiltCompose = "1.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -38,6 +39,7 @@ coroutines-android = {group = "org.jetbrains.kotlinx", name = "kotlinx-coroutine
 
 hilt-android = {group = "com.google.dagger", name = "hilt-android", version.ref = "hilt"}
 hilt-compiler = {group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt"}
+hilt-navigation-compose = {group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hiltCompose"}
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
